@@ -263,7 +263,7 @@ CMake Deprecation Warning at CMakeLists.txt:2 (cmake_minimum_required):
 ==> Finished making: hello-git a707ee9-1 (Sat 14 Dec 2024 04:01:23 PM IST)
 ```
 
-Your working directory should have a file named `hello-git-a707ee9-1-x86_64.pkg.tar`. This is the built package.
+Your working directory should have a file named `hello-git-a707ee9-1-x86_64.pkg.tar`. This is the built package. Note that the package name contains version, which in this case is the latest commit hash. Hence, this might be different when you build the package.
 
 A summary of useful flags for makepkg:
 
@@ -273,3 +273,90 @@ A summary of useful flags for makepkg:
 - `--skipchecksums`: do not verify checksum of source files
 - `-i, --install`: install package after successful build
 - `-s, --sycdeps`: install missing build/run dependencies
+
+## Installing and running the built package
+
+Installing the built package is very straightforward.
+
+```sh
+sudo pacman -U hello-git-a707ee9-1-x86_64.pkg.tar
+```
+
+After installation, we can run the application and query `pacman` (the package manager) for details.
+
+```
+lain@wired /tmp/build
+$ greet
+Hello World!
+lain@wired /tmp/build
+$ pacman -Qo /usr/bin/greet
+/usr/bin/greet is owned by hello-git a707ee9-1
+```
+
+You can even ask `pacman` to uninstall the package.
+
+```
+lain@wired /tmp/build
+$ sudo pacman -R hello-git
+checking dependencies...
+
+Package (1)  Old Version  Net Change
+
+hello-git    a707ee9-1     -0.01 MiB
+
+Total Removed Size:  0.01 MiB
+
+:: Do you want to remove these packages? [Y/n] y
+:: Processing package changes...
+(1/1) removing hello-git                           [------------------------] 100%
+:: Running post-transaction hooks...
+(1/1) Arming ConditionNeedsUpdate...
+```
+
+## Extracting our built package
+
+As a final exercise, we shall do what we did in the last page: extracting a package and observing its contents.
+
+```sh
+mkdir hello
+tar -C hello -xf hello-git-a707ee9-1-x86_64.pkg.tar
+cd hello
+```
+
+Lets see the directory tree
+
+```
+lain@wired /tmp/build/hello
+$ tree -a
+.
+├── .BUILDINFO
+├── .MTREE
+├── .PKGINFO
+└── usr
+    └── bin
+        └── greet
+```
+
+We can see the three metadata files, along with the one binary that we built from source.
+
+Since we have lot less files in this package, compared to `mdbook`, contents of `.MTREE` are lesser too.
+
+```
+lain@wired /tmp/build/hello
+$ zcat .MTREE
+#mtree
+/set type=file uid=0 gid=0 mode=644
+./.BUILDINFO time=1734184494.0 size=55438 sha256digest=bfc13d6c81cf88b6033753fc080fddbfb02fedd3047b0a325fdb88b84c21ddaa
+./.PKGINFO time=1734184494.0 size=313 sha256digest=720c516ff2c14fa965a6b1ed893507622181ad87ba1a011b3ffa5d6e12d70517
+./usr time=1734184494.0 mode=755 type=dir
+./usr/bin time=1734184494.0 mode=755 type=dir
+./usr/bin/greet time=1734184494.0 mode=755 size=15480 sha256digest=0348f619559c5913f255159583c733aaf0799cf27b8d6130e8ee41c11ba8191e
+```
+
+## Further resources
+
+
+- [Creating packages - Arch Wiki](https://wiki.archlinux.org/title/Creating_packages)
+- [Arch package guidelines](https://wiki.archlinux.org/title/Arch_package_guidelines)
+  - on the top of this page, you'll also find links to language specific guideline pages
+- [Arch package guidelines/Security](https://wiki.archlinux.org/title/Arch_package_guidelines/Security)
