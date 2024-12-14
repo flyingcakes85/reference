@@ -153,6 +153,16 @@ $ zcat .MTREE
 ./usr/share/zsh/site-functions/_mdbook time=1732564809.0 mode=644 size=10795 sha256digest=86db03752e01a5090041d67ff5b9824eaf59b02b93e2eb5bb7e00ef784bac13e
 ```
 
+Just for example, you can get hash of a file and compare with the value in `.MTREE`.
+
+```
+lain@wired /tmp/mdbook
+$ sha256sum usr/bin/mdbook
+885ad1dd57886aea81f9d1b3fb0e56a4202a4a82b11481d4ea3259591dc4ac8f  usr/bin/mdbook
+```
+
+The hash does indeed match with the value in `.MTREE`.
+
 #### .BUILDINFO
 
 This file contains information about the build environment where this package was built. This is necessary for reproducible builds. It contains list of packages that existed in the build environment and specific build flags.
