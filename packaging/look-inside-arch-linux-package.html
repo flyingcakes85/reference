@@ -1,0 +1,453 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Lets look inside an Arch Linux package - Reference</title>
+                
+
+        <!-- Custom HTML head -->
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+                <link rel="icon" href="../favicon.svg">
+                        <link rel="shortcut icon" href="../favicon.png">
+                <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+                <link rel="stylesheet" href="../css/print.css" media="print">
+        
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+                <link rel="stylesheet" href="../fonts/fonts.css">
+        
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+                <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+            </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="../fuse-create-filesystems.html"><strong aria-hidden="true">1.</strong> Using FUSE to create filesystems (Talk)</a></li><li class="chapter-item expanded "><a href="../packaging/packaging-guide.html"><strong aria-hidden="true">2.</strong> A Guide to Packaging (Talk)</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../packaging/what-is-packaging.html"><strong aria-hidden="true">2.1.</strong> What is packaging and package manager?</a></li><li class="chapter-item expanded "><a href="../packaging/what-exactly-is-in-a-package.html"><strong aria-hidden="true">2.2.</strong> What exactly is in a package?</a></li><li class="chapter-item expanded "><a href="../packaging/look-inside-arch-linux-package.html" class="active"><strong aria-hidden="true">2.3.</strong> Lets look inside an Arch Linux package</a></li><li class="chapter-item expanded "><a href="../packaging/packaging-on-arch.html"><strong aria-hidden="true">2.4.</strong> Packaging on Arch Linux</a></li></ol></li></ol>            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                                                <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                                            </div>
+
+                    <h1 class="menu-title">Reference</h1>
+
+                    <div class="right-buttons">
+                                                <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                                                                        
+                    </div>
+                </div>
+
+                                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="lets-look-inside-an-arch-linux-package"><a class="header" href="#lets-look-inside-an-arch-linux-package">Lets look inside an Arch Linux package</a></h1>
+<p>For the purpose of this demonstration, I'm going to be showing contents of 2 packages:</p>
+<ul>
+<li>first, we see <strong>mdbook</strong>, which is the tool I'm using to build this reference website
+<ul>
+<li>I've chosen it, beacuse the package for mdbook is very simple</li>
+</ul>
+</li>
+<li>second is <strong>btop</strong>, a system resource monitor
+<ul>
+<li>I've chosen this to show what extra items a GUI application usually bundles</li>
+</ul>
+</li>
+</ul>
+<h2 id="tldr"><a class="header" href="#tldr">tl;dr</a></h2>
+<p>The purpose of this page is to show that a package contains files necessary for the software to work, placed nicely in relevant directories. Along with these files, package has some metadata files, which are required by package manager.</p>
+<p>If you can appreciate these two facts, then you may skip this page.</p>
+<h2 id="look-inside-mdbook"><a class="header" href="#look-inside-mdbook">Look inside: mdbook</a></h2>
+<h3 id="download-the-package"><a class="header" href="#download-the-package">Download the package</a></h3>
+<p>I'm downloading <strong>mdbook</strong> version 0.4.43, the latest as of composing this document. Depending on when you're reading, this version could be outdated or even removed from mirrors. You'll always find the latest version here: <a href="https://archlinux.org/packages/extra/x86_64/mdbook/download/">https://archlinux.org/packages/extra/x86_64/mdbook/download/</a></p>
+<pre><code class="language-sh">cd /tmp
+wget https://london.mirror.pkgbuild.com/extra/os/x86_64/mdbook-0.4.43-1-x86_64.pkg.tar.zst
+</code></pre>
+<h3 id="extracting-the-package"><a class="header" href="#extracting-the-package">Extracting the package</a></h3>
+<pre><code class="language-sh">mkdir mdbook
+tar -C mdbook -xf mdbook-0.4.43-1-x86_64.pkg.tar.zst
+</code></pre>
+<p>At this point, you can see the contents of folder <code>mdbook</code></p>
+<pre><code class="language-sh">cd mdbook
+ls -alh mdbook
+</code></pre>
+<p>It should give the following output</p>
+<pre><code>lain@wired /tmp/mdbook
+$ ls -alh
+total 16K
+drwxr-xr-x  3 lain lain  120 Dec 12 15:27 .
+drwxrwxrwt 19 root root  560 Dec 12 15:26 ..
+-rw-r--r--  1 lain lain 5.3K Nov 26 01:30 .BUILDINFO
+-rw-r--r--  1 lain lain  597 Nov 26 01:30 .MTREE
+-rw-r--r--  1 lain lain  409 Nov 26 01:30 .PKGINFO
+drwxr-xr-x  4 lain lain   80 Nov 26 01:30 usr
+</code></pre>
+<p>Those familier with <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html">Filesystem Hierarchy Standard</a> will already recognize the <code>usr</code> folder. We'll come to that later.</p>
+<h3 id="exploring-the-package"><a class="header" href="#exploring-the-package">Exploring the package</a></h3>
+<p>Lets first explore the <code>usr</code> folder.</p>
+<pre><code>lain@wired /tmp/mdbook
+$ tree usr
+usr
+├── bin
+│   └── mdbook
+└── share
+    ├── bash-completion
+    │   └── completions
+    │       └── mdbook
+    ├── doc
+    │   └── mdbook
+    │       └── README.md
+    ├── fish
+    │   └── vendor_completions.d
+    │       └── mdbook.fish
+    └── zsh
+        └── site-functions
+            └── _mdbook
+</code></pre>
+<p>Normally, you'd find more folders under <code>/usr</code> on your system, but since this package needs to place files in only two of them (<code>bin</code> and <code>share</code>), it has only those two folders.</p>
+<h4 id="the-main-binary"><a class="header" href="#the-main-binary">The main binary</a></h4>
+<p>Under <code>usr/bin</code> we can see the binary, which is our software itself.</p>
+<pre><code>lain@wired /tmp/mdbook
+$ file usr/bin/mdbook
+usr/bin/mdbook: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=7f0d0368fa7949be803463b0b426fb8655febfb6, for GNU/Linux 4.4.0, stripped
+</code></pre>
+<p>Explaining this output is beyond the scope of this reference. All you need to be convinced of as of now is that the file I just discussed is actually a binary, because <code>file</code> reports it to be of ELF format.</p>
+<h4 id="documentation"><a class="header" href="#documentation">Documentation</a></h4>
+<p>Under <code>usr/share/doc/mdbook</code> you see a bundled <code>README.md</code> file which has a basic starting point to using <code>mdbook</code>.</p>
+<p>Documentations need not be markdown files. HTML files as documentation are very common too. Note that these are different from manpages, which are supposed to be stored in <code>/usr/share/man</code>.</p>
+<h4 id="shell-completions"><a class="header" href="#shell-completions">Shell completions</a></h4>
+<p>Finally, we're left with 3 folders</p>
+<ul>
+<li><code>usr/share/bash-completion</code></li>
+<li><code>usr/share/zsh</code></li>
+<li><code>usr/share/fish</code></li>
+</ul>
+<p>These folders bundle shell completions for <code>bash</code>, <code>zsh</code> and <code>fish</code> respectively. These are not necessary to be bundled, but nice to have nonetheless.</p>
+<h3 id="metadata-files"><a class="header" href="#metadata-files">Metadata files</a></h3>
+<p>We see 3 files not discussed yet: <code>.BUILDINFO</code>, <code>.MTREE</code> and <code>.PKGINFO</code>. These are metadata files, which aren't directly required by the software itself, but are needed nonetheless for installing and managing the package.</p>
+<h4 id="mtree"><a class="header" href="#mtree">.MTREE</a></h4>
+<p>This file contains hashes and timestamps of all files which are in the package. This is used by package manager to verify integrity of package.</p>
+<p>Since its a compressed file, you can't directly <code>cat</code> it.</p>
+<pre><code>lain@wired /tmp/mdbook
+$ file .MTREE
+.MTREE: gzip compressed data, from Unix, original size modulo 2^32 1584
+</code></pre>
+<p><code>file</code> reports it to be gzip compressed. Use <code>zcat</code> to print out contents.</p>
+<pre><code>lain@wired /tmp/mdbook
+$ zcat .MTREE
+#mtree
+/set type=file uid=0 gid=0 mode=644
+./.BUILDINFO time=1732564809.0 size=5338 sha256digest=39d286ee40b577d2386b97104cb14b0ce01c98a42ae031300017202237f81872
+./.PKGINFO time=1732564809.0 size=409 sha256digest=adc6a6de09619057285d9d76cbdb8ee9f3e99fd4e39ce41b0bdd924dbe1eab60
+/set mode=755
+./usr time=1732564809.0 type=dir
+./usr/bin time=1732564809.0 type=dir
+./usr/bin/mdbook time=1732564809.0 size=12027696 sha256digest=885ad1dd57886aea81f9d1b3fb0e56a4202a4a82b11481d4ea3259591dc4ac8f
+./usr/share time=1732564809.0 type=dir
+./usr/share/bash-completion time=1732564809.0 type=dir
+./usr/share/bash-completion/completions time=1732564809.0 type=dir
+./usr/share/bash-completion/completions/mdbook time=1732564809.0 mode=644 size=12922 sha256digest=4693cccac54ccf2c98f1ba4595a89028454c0222f568b7db1461ccc48ce7f868
+./usr/share/doc time=1732564809.0 type=dir
+./usr/share/doc/mdbook time=1732564809.0 type=dir
+./usr/share/doc/mdbook/README.md time=1732564809.0 mode=644 size=1046 sha256digest=44e4086a85125c978b6c56be6beeb5d5b24c7394c96e281c1c589217eff4ca5f
+./usr/share/fish time=1732564809.0 type=dir
+./usr/share/fish/vendor_completions.d time=1732564809.0 type=dir
+./usr/share/fish/vendor_completions.d/mdbook.fish time=1732564809.0 mode=644 size=7822 sha256digest=19374afc581279c2a31579171096e3fb03615b417431466c829e39a7a8d3b9cb
+./usr/share/zsh time=1732564809.0 type=dir
+./usr/share/zsh/site-functions time=1732564809.0 type=dir
+./usr/share/zsh/site-functions/_mdbook time=1732564809.0 mode=644 size=10795 sha256digest=86db03752e01a5090041d67ff5b9824eaf59b02b93e2eb5bb7e00ef784bac13e
+</code></pre>
+<h4 id="buildinfo"><a class="header" href="#buildinfo">.BUILDINFO</a></h4>
+<p>This file contains information about the build environment where this package was built. This is necessary for reproducible builds. It contains list of packages that existed in the build environment and specific build flags.</p>
+<p>I am intentionally not copying the contents here, since the file is too long.</p>
+<h4 id="pkginfo"><a class="header" href="#pkginfo">.PKGINFO</a></h4>
+<p>This file contains metadata which the package manager needs to install/manage the package.</p>
+<pre><code>lain@wired /tmp/mdbook
+$ cat .PKGINFO
+# Generated by makepkg 7.0.0
+# using fakeroot version 1.36
+pkgname = mdbook
+pkgbase = mdbook
+xdata = pkgtype=pkg
+pkgver = 0.4.43-1
+pkgdesc = Create book from markdown files, like Gitbook but implemented in Rust
+url = https://github.com/rust-lang/mdBook
+builddate = 1732564809
+packager = Caleb Maclennan &lt;alerque@archlinux.org&gt;
+size = 12060281
+arch = x86_64
+license = MPL2
+depend = gcc-libs
+makedepend = cargo
+</code></pre>
+<p>You'll notice this includes a key named <code>depends</code>. This is where the dependencies are listed and pacman knows which other packages need to be installed prior, in order for the current one to work. In this case, <code>mdbook</code> needs <code>gcc-libs</code> in order to work.</p>
+<h4 id="more-metadata-files"><a class="header" href="#more-metadata-files">More metadata files</a></h4>
+<p>The three metadata files we discussed are compulsory to be included with every package. However, there are two more files which are optionally included.</p>
+<ul>
+<li><code>.INSTALL</code>: this is used to bundle commands which need to be run after install, upgrade or removal of the package</li>
+<li><code>.Changelog</code>: an optional file kept by package maintainer documenting changes of the package</li>
+</ul>
+<h3 id="libraries"><a class="header" href="#libraries">Libraries</a></h3>
+<p>Since <code>mdbook</code> is written in Rust, it is <em>almost</em> a statically linked executable. All dependencies are statically linked (i.e. part of the binary itself) and the only library it links dynamically is GNU LibC. (and hence the external dependency on <code>gcc-libs</code> above) Had it bundled shared libraries, they would have been placed in <code>usr/lib</code>.</p>
+<h2 id="look-inside-btop"><a class="header" href="#look-inside-btop">Look inside: btop</a></h2>
+<p>Similar to the last section, lets get through this quick.</p>
+<h3 id="download-and-extract"><a class="header" href="#download-and-extract">Download and extract</a></h3>
+<p>The latest version of <code>btop</code> is always available at https://archlinux.org/packages/extra/x86_64/btop/download/</p>
+<pre><code class="language-sh">cd /tmp
+wget https://london.mirror.pkgbuild.com/extra/os/x86_64/btop-1.4.0-4-x86_64.pkg.tar.zst
+mkdir btop
+tar -C btop -xf btop-1.4.0-4-x86_64.pkg.tar.zst
+</code></pre>
+<h3 id="exploring-the-package-1"><a class="header" href="#exploring-the-package-1">Exploring the package</a></h3>
+<p>The <code>usr</code> folder for <code>btop</code> looks like this</p>
+<pre><code>lain@wired /tmp/btop
+$ tree usr
+usr
+├── bin
+│   └── btop
+└── share
+    ├── applications
+    │   └── btop.desktop
+    ├── btop
+    │   ├── README.md
+    │   └── themes
+    │       ├── adapta.theme
+    │       ├── adwaita.theme
+    │       ├── ayu.theme
+    │       ├── dracula.theme
+    │       ├── dusklight.theme
+    │       ├── elementarish.theme
+    │       ├── everforest-dark-hard.theme
+    │       ├── everforest-dark-medium.theme
+    │       ├── flat-remix-light.theme
+    │       ├── flat-remix.theme
+    │       ├── greyscale.theme
+    │       ├── gruvbox_dark.theme
+    │       ├── gruvbox_dark_v2.theme
+    │       ├── gruvbox_light.theme
+    │       ├── gruvbox_material_dark.theme
+    │       ├── horizon.theme
+    │       ├── HotPurpleTrafficLight.theme
+    │       ├── kyli0x.theme
+    │       ├── matcha-dark-sea.theme
+    │       ├── monokai.theme
+    │       ├── night-owl.theme
+    │       ├── nord.theme
+    │       ├── onedark.theme
+    │       ├── paper.theme
+    │       ├── phoenix-night.theme
+    │       ├── solarized_dark.theme
+    │       ├── solarized_light.theme
+    │       ├── tokyo-night.theme
+    │       ├── tokyo-storm.theme
+    │       ├── tomorrow-night.theme
+    │       └── whiteout.theme
+    ├── icons
+    │   └── hicolor
+    │       ├── 48x48
+    │       │   └── apps
+    │       │       └── btop.png
+    │       └── scalable
+    │           └── apps
+    │               └── btop.svg
+    └── man
+        └── man1
+            └── btop.1.gz
+</code></pre>
+<h4 id="binary"><a class="header" href="#binary">Binary</a></h4>
+<p>The binary is again located inside <code>usr/bin</code>.</p>
+<pre><code>lain@wired /tmp/btop
+$ file usr/bin/btop
+usr/bin/btop: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=112225f945ec5d5c28f69c1de22117f957a926f9, for GNU/Linux 4.4.0, stripped
+</code></pre>
+<p>We can run <code>ldd</code> to check which all libraries it is likned to.</p>
+<pre><code>lain@wired /tmp/btop
+$ ldd usr/bin/btop
+	linux-vdso.so.1 (0x00007ffd9e7fd000)
+	libstdc++.so.6 =&gt; /usr/lib/libstdc++.so.6 (0x000070b648c00000)
+	libm.so.6 =&gt; /usr/lib/libm.so.6 (0x000070b648b11000)
+	libgcc_s.so.1 =&gt; /usr/lib/libgcc_s.so.1 (0x000070b648ae3000)
+	libc.so.6 =&gt; /usr/lib/libc.so.6 (0x000070b6488f2000)
+	/lib64/ld-linux-x86-64.so.2 =&gt; /usr/lib64/ld-linux-x86-64.so.2 (0x000070b649026000)
+</code></pre>
+<h4 id="manpage"><a class="header" href="#manpage">Manpage</a></h4>
+<p>Manpage for <code>btop</code> is in the Troff format. You can read the bundled manpage file using the <code>man</code> command.</p>
+<pre><code class="language-sh">man usr/share/man/man1/btop.1.gz
+</code></pre>
+<h3 id="desktop-file-and-icons"><a class="header" href="#desktop-file-and-icons">Desktop file and icons</a></h3>
+<p>You'll find a desktop file at <code>usr/share/applications/btop.desktop</code> which contains the desktop entry.</p>
+<pre><code>lain@wired /tmp/btop
+$ cat usr/share/applications/btop.desktop
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=btop++
+GenericName=System Monitor
+GenericName[it]=Monitor di sistema
+Comment=Resource monitor that shows usage and stats for processor, memory, disks, network and processes
+Comment[it]=Monitoraggio delle risorse: mostra utilizzo e statistiche per CPU, dischi, rete e processi
+Icon=btop
+Exec=btop
+Terminal=true
+Categories=System;Monitor;ConsoleOnly;
+Keywords=system;process;task
+</code></pre>
+<p>The specific icon mentioned here is then searched for inside <code>/usr/share/icons</code>. The relevant icons are bundled in package at <code>usr/share/icons/hicolor/48x48/apps/btop.png</code> and <code>usr/share/icons/hicolor/scalable/apps/btop.svg</code>.</p>
+<h3 id="btop-specific-themes"><a class="header" href="#btop-specific-themes">Btop specific themes</a></h3>
+<p>Finally, <code>btop</code> also supports loading different theme definitions. The default set of bundled themes is placed inside a dedicated folder at <code>usr/share/btop/themes</code>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                                                    <a rel="prev" href="../packaging/what-exactly-is-in-a-package.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+                                                    <a rel="next" href="../packaging/packaging-on-arch.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                                    <a rel="prev" href="../packaging/what-exactly-is-in-a-package.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+                                    <a rel="next" href="../packaging/packaging-on-arch.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                            </nav>
+
+        </div>
+
+        
+        
+        
+                <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+        
+                <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        
+    </body>
+</html>

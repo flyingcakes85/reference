@@ -1,0 +1,406 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Packaging on Arch Linux - Reference</title>
+                
+
+        <!-- Custom HTML head -->
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+                <link rel="icon" href="../favicon.svg">
+                        <link rel="shortcut icon" href="../favicon.png">
+                <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+                <link rel="stylesheet" href="../css/print.css" media="print">
+        
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+                <link rel="stylesheet" href="../fonts/fonts.css">
+        
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+                <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+            </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="../fuse-create-filesystems.html"><strong aria-hidden="true">1.</strong> Using FUSE to create filesystems (Talk)</a></li><li class="chapter-item expanded "><a href="../packaging/packaging-guide.html"><strong aria-hidden="true">2.</strong> A Guide to Packaging (Talk)</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../packaging/what-is-packaging.html"><strong aria-hidden="true">2.1.</strong> What is packaging and package manager?</a></li><li class="chapter-item expanded "><a href="../packaging/what-exactly-is-in-a-package.html"><strong aria-hidden="true">2.2.</strong> What exactly is in a package?</a></li><li class="chapter-item expanded "><a href="../packaging/look-inside-arch-linux-package.html"><strong aria-hidden="true">2.3.</strong> Lets look inside an Arch Linux package</a></li><li class="chapter-item expanded "><a href="../packaging/packaging-on-arch.html" class="active"><strong aria-hidden="true">2.4.</strong> Packaging on Arch Linux</a></li></ol></li></ol>            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                                                <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                                            </div>
+
+                    <h1 class="menu-title">Reference</h1>
+
+                    <div class="right-buttons">
+                                                <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                                                                        
+                    </div>
+                </div>
+
+                                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="packaging-on-arch-linux"><a class="header" href="#packaging-on-arch-linux">Packaging on Arch Linux</a></h1>
+<p>The official wiki page (highly recommended to read) can be found here: <a href="https://wiki.archlinux.org/title/Creating_packages">Creating packages - Arch Wiki</a>. My page gives a brief overview of the process.</p>
+<h2 id="package-build-process"><a class="header" href="#package-build-process">Package build process</a></h2>
+<p>Packages on Arch Linux are built using <code>makepkg</code> tool. It takes a <code>PKGBUILD</code> as input and follows it to output a package archive.</p>
+<p>The <code>PKGBUILD</code> is a recipe which lists ingredients (sources) and process (build steps) to build a package.</p>
+<p><code>makepkg</code> looks at the sources and downloads them. It then computes hashes of downloaded sources with the checksums provided in <code>PKGBUILD</code>. Once the verification is complete, sources are extracted and built using the recipe provided. The said recipe must be executable in <code>bash</code>. Finally, upon successful build, the build outputs are archived along with the metadata into a package. This package is what the package manager (<code>pacman</code>) later extracts in order to &quot;install&quot; the software.</p>
+<h2 id="pkgbuild"><a class="header" href="#pkgbuild">PKGBUILD</a></h2>
+<p>Arch Linux provides a starting point with bundled protoype for a PKGBUILD.</p>
+<pre><code>lain@wired ~
+cat /usr/share/pacman/PKGBUILD.proto
+# This is an example PKGBUILD file. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'.
+# NOTE: Please fill out the license field for your package! If it is unknown,
+# then please put 'unknown'.
+
+# Maintainer: Your Name &lt;youremail@domain.com&gt;
+pkgname=NAME
+pkgver=VERSION
+pkgrel=1
+epoch=
+pkgdesc=&quot;&quot;
+arch=()
+url=&quot;&quot;
+license=('GPL')
+groups=()
+depends=()
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=(&quot;$pkgname-$pkgver.tar.gz&quot;
+        &quot;$pkgname-$pkgver.patch&quot;)
+noextract=()
+sha256sums=()
+validpgpkeys=()
+
+prepare() {
+	cd &quot;$pkgname-$pkgver&quot;
+	patch -p1 -i &quot;$srcdir/$pkgname-$pkgver.patch&quot;
+}
+
+build() {
+	cd &quot;$pkgname-$pkgver&quot;
+	./configure --prefix=/usr
+	make
+}
+
+check() {
+	cd &quot;$pkgname-$pkgver&quot;
+	make -k check
+}
+
+package() {
+	cd &quot;$pkgname-$pkgver&quot;
+	make DESTDIR=&quot;$pkgdir/&quot; install
+}
+</code></pre>
+<p>There are a lot of parameters, although, its not necessary to fill in all of them. You would fill in the file with relevant values. Refer an existing PKGBUILD (for example, <a href="https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=maptool-bin"><code>maptool-bin</code></a>) to see what values should go in.</p>
+<h2 id="pkgbuild-functions"><a class="header" href="#pkgbuild-functions">PKGBUILD functions</a></h2>
+<h3 id="prepare"><a class="header" href="#prepare"><code>prepare()</code></a></h3>
+<p>Steps to prepare sources for building should go here. Normally, this normally includes patches and distribution specific changes.</p>
+<h3 id="pkgver"><a class="header" href="#pkgver"><code>pkgver()</code></a></h3>
+<p>This step fetches package version. While package version is usually defined in the variable outside, the version for VCS sources needs to be fetched via shell commands that go in this function.</p>
+<h3 id="build"><a class="header" href="#build"><code>build()</code></a></h3>
+<p>Here comes the actual build step. A very simple <code>build()</code> function can look like this:</p>
+<pre><code class="language-sh">build() {
+    ./configure --prefix=/usr
+    make DESTDIR=&quot;$pkgdir/&quot; install
+}
+</code></pre>
+<p>This is source specific and packager needs to know if there are any build systems needed and what pre build steps need to be ensured. For example, build dependencies must be fetched before building.</p>
+<h3 id="check"><a class="header" href="#check"><code>check()</code></a></h3>
+<p>The test suite invocation goes here. Classically, this could be as simple as:</p>
+<pre><code class="language-sh">check() {
+    make check
+}
+</code></pre>
+<p>However, modern test suites are more sophisticated and this function needs to be adapted accordingly.</p>
+<h3 id="package"><a class="header" href="#package"><code>package()</code></a></h3>
+<p>This is the final step, which is also compulsory for all packages to include. Here, the built files are copied into <code>$pkgdir</code> to ensure they're copied into the final package archive.</p>
+<h2 id="sample-pkgbuild"><a class="header" href="#sample-pkgbuild">Sample PKGBUILD</a></h2>
+<p>Lets build a simple PKGBUILD for a hello world application. The source for our application is going to be a GitHub repository, sepcifically <a href="https://github.com/memsharded/hello">memsharded/hello</a>.</p>
+<p>Filling up the PKGBUILD variables, it should look like this:</p>
+<pre><code class="language-bash">pkgname=hello-git
+_pkgname=hello
+pkgver=0.0.1
+pkgrel=1
+pkgdesc='A hello world application'
+url='https://github.com/memsharded/hello'
+source=(&quot;git+https://github.com/memsharded/hello&quot;)
+arch=('x86_64')
+licence=('MIT')
+makedepends=('cmake')
+sha256sums=(SKIP)
+</code></pre>
+<p>We have skipped checksum, because when we're using git as the source, git is doing its own checksum and ensuring integrity.</p>
+<p>This application doesn't need any pre-build steps, so we can skip that. The application has a git source, so we do need <code>pkgver()</code> function to generate a version. In our case, we will use the short commit hash as the version.</p>
+<pre><code class="language-bash">pkgver() {
+    cd &quot;$srcdir/$_pkgname&quot;
+    git log --oneline | head -n 1 | cut -d' ' -f1
+}
+</code></pre>
+<p>Lets move to writing the <code>build()</code> function.</p>
+<p>The source has provided <code>CMakeLists.txt</code> file, which is a clear indication that its using <a href="https://cmake.org/">CMake</a>. So, lets put the relevant CMake build step in here:</p>
+<pre><code class="language-bash">build() {
+    cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr hello
+    make
+}
+</code></pre>
+<p>By now, we've built the binary from source. Finally, we must copy over binary to <code>$pkgdir</code> so that it ends up in package archive. This is done inside <code>package()</code> function.</p>
+<pre><code class="language-bash">package() {
+    install -Dm755 &quot;$srcdir/hello/bin/greet&quot; &quot;$pkgdir/usr/bin/greet&quot;
+}
+</code></pre>
+<p>The final <code>PKGBUILD</code> should look like this:</p>
+<pre><code class="language-bash">pkgname=hello-git
+_pkgname=hello
+pkgver=a707ee9
+pkgrel=1
+pkgdesc='A hello world application'
+url='https://github.com/memsharded/hello'
+source=(&quot;git+https://github.com/memsharded/hello&quot;)
+arch=('x86_64')
+licence=('MIT')
+makedepends=('cmake')
+sha256sums=(SKIP)
+
+pkgver() {
+    cd &quot;$srcdir/$_pkgname&quot;
+    git log --oneline | head -n 1 | cut -d' ' -f1
+}
+
+build() {
+    cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr hello
+    make
+}
+
+package() {
+    install -Dm755 &quot;$srcdir/hello/bin/greet&quot; &quot;$pkgdir/usr/bin/greet&quot;
+}
+</code></pre>
+<h2 id="building-from-pkgbuild"><a class="header" href="#building-from-pkgbuild">Building from PKGBUILD</a></h2>
+<p>As mentioned before, the tool to build from <code>PKGBUILD</code> is <code>makepkg</code>.</p>
+<p>Lets build the <code>PKGBUILD</code>. Change into the directory which has <code>PKGBUILD</code> and run:</p>
+<pre><code class="language-sh">makepkg -s
+</code></pre>
+<p>This will fetch source, build and package it. Sample output is shown below</p>
+<pre><code>==&gt; Making package: hello-git 0.0.1-1 (Sat 14 Dec 2024 04:01:21 PM IST)
+==&gt; Checking runtime dependencies...
+==&gt; Checking buildtime dependencies...
+==&gt; Retrieving sources...
+  -&gt; Updating hello git repo...
+==&gt; Validating source files with sha256sums...
+    hello ... Skipped
+==&gt; Extracting sources...
+  -&gt; Creating working copy of hello git repo...
+Reset branch 'makepkg'
+==&gt; Starting pkgver()...
+==&gt; Updated version: hello-git a707ee9-1
+==&gt; Removing existing $pkgdir/ directory...
+==&gt; Starting build()...
+CMake Warning (dev) at CMakeLists.txt:1 (PROJECT):
+  cmake_minimum_required() should be called prior to this top-level project()
+  call.  Please see the cmake-commands(7) manual for usage documentation of
+  both commands.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Deprecation Warning at CMakeLists.txt:2 (cmake_minimum_required):
+  Compatibility with CMake &lt; 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument &lt;min&gt; value.  Or, use the &lt;min&gt;...&lt;max&gt; syntax
+  to tell CMake that the project requires at least &lt;min&gt; but has been updated
+  to work with policies introduced by &lt;max&gt; or earlier.
+
+
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /mnt/hd1/home/lain/.cache/aur/hello-git/src
+[ 50%] Built target hello
+[100%] Built target greet
+==&gt; Entering fakeroot environment...
+==&gt; Starting package()...
+==&gt; Tidying install...
+  -&gt; Removing libtool files...
+  -&gt; Purging unwanted files...
+  -&gt; Removing static library files...
+  -&gt; Stripping unneeded symbols from binaries and libraries...
+  -&gt; Compressing man and info pages...
+==&gt; Checking for packaging issues...
+==&gt; Creating package &quot;hello-git&quot;...
+  -&gt; Generating .PKGINFO file...
+  -&gt; Generating .BUILDINFO file...
+  -&gt; Generating .MTREE file...
+  -&gt; Compressing package...
+==&gt; Leaving fakeroot environment.
+==&gt; Finished making: hello-git a707ee9-1 (Sat 14 Dec 2024 04:01:23 PM IST)
+</code></pre>
+<p>Your working directory should have a file named <code>hello-git-a707ee9-1-x86_64.pkg.tar</code>. This is the built package.</p>
+<p>A summary of useful flags for makepkg:</p>
+<ul>
+<li><code>-c, --clean</code>: clean up leftover files after successful build</li>
+<li><code>-e, --noextract</code>: this will force <code>makepkg</code> to not extract source files or run <code>prepare()</code>. Useful when manually making changes in <code>$srcdir</code> to test.</li>
+<li><code>-f, --force</code>: rebuild the package even if its already built</li>
+<li><code>--skipchecksums</code>: do not verify checksum of source files</li>
+<li><code>-i, --install</code>: install package after successful build</li>
+<li><code>-s, --sycdeps</code>: install missing build/run dependencies</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                                                    <a rel="prev" href="../packaging/look-inside-arch-linux-package.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+                        
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                                    <a rel="prev" href="../packaging/look-inside-arch-linux-package.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+                            </nav>
+
+        </div>
+
+        
+        
+        
+                <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+        
+                <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        
+    </body>
+</html>
