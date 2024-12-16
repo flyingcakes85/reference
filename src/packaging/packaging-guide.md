@@ -10,4 +10,4 @@ This is the reference chapter for my talk about packaging. I've put main focus o
 ## Resources
 
 - short link to this page: [x.snehit.dev/pkt](https://x.snehit.dev/pkt)
-- slides: [files.snehit.dev/Packaging-Talk-Slides-1124.pdf](https://files.snehit.dev/Packaging-Talk-Slides-1124.pdf)
+- slides: [x.snehit.dev/pkt-sildes](https://x.snehit.dev/pkt-sildes)
