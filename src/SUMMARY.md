@@ -8,3 +8,4 @@
     - [What exactly is in a package?](./packaging/what-exactly-is-in-a-package.md)
     - [Lets look inside an Arch Linux package](./packaging/look-inside-arch-linux-package.md)
     - [Packaging on Arch Linux](./packaging/packaging-on-arch.md)
+- [Static site URL shortener (Linky)](./static-site-url-shortener-linky.md)
