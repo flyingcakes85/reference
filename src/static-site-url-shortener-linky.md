@@ -1,5 +1,12 @@
 # Static site URL shortener with Linky
 
+This is a short documentation of the thought and functioning behind Linky, a simple URL shortener which I'm presently using on [x.snehit.dev](https://x.snehit.dev).
+
+You can find the script at:
+
+- GitHub: [flyingcakes85/linky](https://github.com/flyingcakes85/linky)
+- GitLab: [flyingcakes/linky](https://flyingcakes/linky)
+
 ## Background
 
 For over 2 years now, I've been running [Suri](https://github.com/surishortlink/suri) for my static site URL shortener. Recently while updating the links, I noticed that Suri builds were failing. I had to re-clone the upstream repo for Suri and add my short links as JSON.
