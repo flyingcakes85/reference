@@ -65,7 +65,17 @@ I've also added `-o`/`--output-dir` flag to change the output folder from `build
 python linky.py links.json --ouptut-dir public
 ```
 
-Additionally, anything in `static` folder will be copied as it is into the build output directory.
+
+## Adding a 404 page
+
+Anything in `static` folder will be copied as it is into the build output directory. One nifty use case for this is to add a `404.html` which will be served by GitHub Pages or Cloudflare Pages whenever needed. Just put the following in `static/404.html`
+
+```html
+<p>Not found</p>
+```
+
+This can, of course, be as simple or as lengthy of a 404 page as you'd like.
+
 
 ## Hosting it
 
