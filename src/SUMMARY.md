@@ -10,6 +10,7 @@
     - [What exactly is in a package?](./packaging/what-exactly-is-in-a-package.md)
     - [Lets look inside an Arch Linux package](./packaging/look-inside-arch-linux-package.md)
     - [Packaging on Arch Linux](./packaging/packaging-on-arch.md)
+    - [Packaging: The broader look](./packaging/packaging-broader-look.md)
 - [Static site URL shortener (Linky)](./static-site-url-shortener-linky.md)
 - [Rust language content dump for talks](./rust-lang-dump.md)
 - [Season of KDE 2022 Blogs](./sok-2022/season-of-kde-2022.md)
