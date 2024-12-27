@@ -29,6 +29,7 @@ Save it as, let's say, `hello.c`. Compile it.
 
 ```sh
 gcc -O2 hello.c -o hello
+chmod +x hello
 ```
 
 This gives you a `hello` binary which prints `hello world`.
@@ -59,7 +60,7 @@ This is rougly what `.PKGINFO` should look like. Save it to the file.
 pkgname = hello-c
 pkgbase = hello-c
 xdata = pkgtype=pkg
-pkgver = 0.1.0-1
+pkgver = 0.1.1-1
 pkgdesc = home cooked hello world in c
 url = https://github.com/flyingcakes/hello-world-c
 builddate = 1735307439
@@ -76,31 +77,12 @@ makedepend = gcc
   - run `date +%s` to find present timestamp and copy paste that
 - to get the size (in bytes), simply run `ls -l usr/bin/hello`
 
-## Generating `.MTREE`
-
-```sh
-bsdtar -czf .MTREE --format=mtree --options='!all,use-set,type,uid,gid,mode,time,size,md5,sha256,link' usr .PKGINFO
-```
-
-This will generate `.MTREE` file. You can verify contents using `zcat`.
-
-```
-$ zcat .MTREE
-#mtree
-/set type=file uid=1000 gid=1000 mode=644
-./.PKGINFO time=1735318522.194493505 size=239 md5digest=d1d0ded3b9f3459f63714f4d0ec858f9 sha256digest=2a35e7b8b6a0c93d22f180666a20352a9d5a0953991a7199e4c5d545858cdc55
-./usr time=1735317631.312675756 mode=755 type=dir
-./usr/bin time=1735317634.369344816 mode=755 type=dir
-./usr/bin/hello time=1735318539.567874863 size=14424 md5digest=e33063b83acf1c5270197ba18a504209 sha256digest=67b23e0fb3a79c0a0fb9ec312c8885c51445509a311a34b8fc28eb38f7f6629b
-```
-
 ## Package it all together!
 
 In `pkg` directory, run `tree -a` and ensure the hierarchy is same as following.
 
 ```
 .
-├── .MTREE
 ├── .PKGINFO
 └── usr
     └── bin
@@ -146,6 +128,16 @@ $ hello
 hello world
 ```
 
+You can verify the binary being called is indeed from the package we installed.
+
+```
+$ which hello
+/usr/bin/hello
+
+$ pacman -Qo /usr/bin/hello
+/usr/bin/hello is owned by hello-c 0.1.1-1
+```
+
 ## Generating `.BUILDINFO`
 
 Notice how we didn't have this file already. As per the Arch wiki, this is used only for reproducible builds and pacman won't check this file during installation itself. Thats why, we could install our `hello-c` package without `.BUILDINFO` file. But for the sake of completeness of this tutorial, lets see how this is generated.
@@ -172,7 +164,7 @@ buildtoolver = 7.0.0
 Next comes `buildenv`. This is defined in `/etc/makepkg.conf`. You can get these by grepping and then format printing.
 
 ```sh
-eval "$(grep'^BUILDENV' /etc/makepkg.conf)"
+eval "$(grep '^BUILDENV' /etc/makepkg.conf)"
 printf "buildenv = %s\n" "${BUILDENV[@]}"
 ```
 
@@ -204,4 +196,31 @@ For the final thing - installed packages - you can get those via `pacman`.
 ```sh
 pkglist=($(pacman -Q | sed "s# #-#"))
 printf "installed = %s\n" "${pkglist[@]}" >> .BUILDINFO
+```
+
+## Generating `.MTREE`
+
+```sh
+bsdtar -czf .MTREE --format=mtree --options='!all,use-set,type,uid,gid,mode,time,size,md5,sha256,link' usr .PKGINFO .BUILDINFO
+```
+
+This will generate `.MTREE` file. You can verify contents using `zcat`.
+
+```
+$ zcat .MTREE
+#mtree
+/set type=file uid=1000 gid=1000 mode=644
+./.BUILDINFO time=1735327948.61170402 size=45046 md5digest=85d3dc8d2df6cfc10a51e2e73d8b3ade sha256digest=6a5730f309470f8253a2e33d1d6284cc55bf64a1d621f1910177b1e87ea64e1c
+./.PKGINFO time=1735318522.194493505 size=239 md5digest=d1d0ded3b9f3459f63714f4d0ec858f9 sha256digest=2a35e7b8b6a0c93d22f180666a20352a9d5a0953991a7199e4c5d545858cdc55
+./usr time=1735317631.312675756 mode=755 type=dir
+./usr/bin time=1735317634.369344816 mode=755 type=dir
+./usr/bin/hello time=1735318539.567874863 mode=755 size=14424 md5digest=e33063b83acf1c5270197ba18a504209 sha256digest=67b23e0fb3a79c0a0fb9ec312c8885c51445509a311a34b8fc28eb38f7f6629b
+```
+
+The command i just used to generate mtree file is from an older version of `makepkg`. Newer version has a slightly heavier command. Nonetheless, result is same.
+
+You can now package it again. Delete `hello.tar` if it exist from older step. Then run the tar command again.
+
+```sh
+tar -cjvf hello.tar $(ls -A)
 ```
