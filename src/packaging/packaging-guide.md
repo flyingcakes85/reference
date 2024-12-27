@@ -6,7 +6,8 @@ This is the reference chapter for my talk about packaging. I've put main focus o
 - [What exactly is in a package?](./what-exactly-is-in-a-package.md)
 - [Lets look inside an Arch Linux package](./look-inside-arch-linux-package.md)
 - [Packaging on Arch Linux](./packaging-on-arch.md)
-- [Packaging: The broader look](./packaging/packaging-broader-look.md)
+- [Packaging the manual way](./packaging-the-manual-way.md)
+- [Packaging: The broader look](./packaging-broader-look.md)
 
 ## Resources
 
