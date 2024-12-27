@@ -318,15 +318,15 @@ Total Removed Size:  0.01 MiB
 As a final exercise, we shall do what we did in the last page: extracting a package and observing its contents.
 
 ```sh
-mkdir hello
-tar -C hello -xf hello-git-a707ee9-1-x86_64.pkg.tar
-cd hello
+mkdir hello_ext
+tar -C hello_ext -xf hello-git-a707ee9-1-x86_64.pkg.tar
+cd hello_ext
 ```
 
 Lets see the directory tree
 
 ```
-lain@wired /tmp/build/hello
+lain@wired /tmp/build/hello_ext
 $ tree -a
 .
 ├── .BUILDINFO
@@ -342,7 +342,7 @@ We can see the three metadata files, along with the one binary that we built fro
 Since we have lot less files in this package, compared to `mdbook`, contents of `.MTREE` are lesser too.
 
 ```
-lain@wired /tmp/build/hello
+lain@wired /tmp/build/hello_ext
 $ zcat .MTREE
 #mtree
 /set type=file uid=0 gid=0 mode=644
