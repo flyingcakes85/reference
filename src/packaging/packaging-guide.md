@@ -1,6 +1,10 @@
 # A Guide to Packaging
-This is the reference chapter for my talk about packaging. I've put main focus on Arch Linux, but its is *only* an example. The core concepts apply to *ALL* packaging systems; not just on Linux distributions, but even on macOS ([Homebrew](https://brew.sh/)) and Windows ([Chocolatey](https://chocolatey.org/)). They can even be extended to language library resgistries like npm, pip, cargo etc. 
 
+This is the reference chapter for my workshop about packaging, hosted by FOSS United at Red Hat, Powai.
+
+I've put main focus on Arch Linux, but its is _only_ an example. The core concepts apply to _ALL_ packaging systems; not just on Linux distributions, but even on macOS ([Homebrew](https://brew.sh/)) and Windows ([Chocolatey](https://chocolatey.org/)). They can even be extended to language library resgistries like npm, pip, cargo etc.
+
+This is presented in 6 parts:
 
 - [What is packaging?](./what-is-packaging.md)
 - [What exactly is in a package?](./what-exactly-is-in-a-package.md)
