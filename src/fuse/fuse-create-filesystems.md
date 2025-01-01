@@ -4,8 +4,8 @@ This talk was presented during FOSS United Delhi meetup at Whizdom Club (Tapasya
 
 This is divided in 2 parts:
 
-- [Introduction to FUSE](./fuse/intro-to-fuse.md)
-- [Using FUSE to write a YouTube channel browser](./fuse/fuse-youtube-channel-browser.md)
+- [Introduction to FUSE](./intro-to-fuse.md)
+- [Using FUSE to write a YouTube channel browser](./fuse-youtube-channel-browser.md)
 
 ## Resources
 
