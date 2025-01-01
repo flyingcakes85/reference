@@ -13,6 +13,8 @@
     - [Packaging the manual way](./packaging/packaging-the-manual-way.md)
     - [Packaging: The broader look](./packaging/packaging-broader-look.md)
 - [Static site URL shortener (Linky)](./static-site-url-shortener-linky.md)
+- [Software Verification Notes](./software-verification/index.md)
+    - [Introduction](./software-verification/introduction.md)
 - [Rust language content dump for talks](./rust-lang-dump.md)
 - [Season of KDE 2022 Blogs](./sok-2022/season-of-kde-2022.md)
     - [Beginning with Season of KDE 2022](./sok-2022/beginning-with-sok-2022.md)
