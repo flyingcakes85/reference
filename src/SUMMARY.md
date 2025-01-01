@@ -15,6 +15,7 @@
 - [Static site URL shortener (Linky)](./static-site-url-shortener-linky.md)
 - [Software Verification Notes](./software-verification/index.md)
     - [Introduction](./software-verification/introduction.md)
+    - [Testing and failure](./software-verification/testing-and-failure.md)
 - [Rust language content dump for talks](./rust-lang-dump.md)
 - [Season of KDE 2022 Blogs](./sok-2022/season-of-kde-2022.md)
     - [Beginning with Season of KDE 2022](./sok-2022/beginning-with-sok-2022.md)
