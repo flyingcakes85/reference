@@ -6,4 +6,8 @@ src = "src"
 title = "Reference"
 
 [output.html]
+additional-js = ["mermaid-init.js"]
 mathjax-support = true
+
+[preprocessor.mermaid]
+command = "mdbook-mermaid"
